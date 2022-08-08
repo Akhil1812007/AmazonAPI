@@ -12,15 +12,14 @@ namespace Amazon.Models
         public DateTime OrderDate { get; set; }
         [Range(0, int.MaxValue)]
         public int total { get; set; }
-        public int CardNumber { get; set; }
+        public int? CardNumber { get; set; }
         [Range(0, int.MaxValue)]
-        public int AmountPaid { get; set; }
+        public int? AmountPaid { get; set; }
 
         [ForeignKey("CustomerId")]
         public int CustomerId { get; set; }
 
-        public virtual Customer Customer { get; set; }
-        //public virtual OrderDetail OrderDetail { get; set; }
-        public ICollection<OrderDetail> OrderDetails { get; set; }
+        public virtual Customer? Customer { get; set; }
+        public ICollection<OrderDetail>? OrderDetails { get; set; }
     }
 }

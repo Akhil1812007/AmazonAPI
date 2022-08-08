@@ -4,10 +4,10 @@ namespace Amazon.Provider
 {
     public interface IMerchantProvider
     {
-        public IEnumerable<Merchant> GetMerchant();
-        Merchant GetMerchantByID(int MerchantId);
-        void InsertMerchant(Merchant Merchant);
-        void DeleteMerchant(int MerchantId);
-        void UpdateMerchant(int MerchantId, Merchant merchant);
+        Task<List<Merchant>> GetMerchant();
+        Task<Merchant> GetMerchantByID(int MerchantId);
+        Task<Merchant> InsertMerchant(Merchant Merchant);
+        Task DeleteMerchant(int MerchantId);
+        Task<Merchant> UpdateMerchant(int MerchantId, Merchant merchant);
     }
 }

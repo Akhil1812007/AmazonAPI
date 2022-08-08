@@ -1,9 +1,10 @@
 ﻿using Amazon.Models;
 using Microsoft.EntityFrameworkCore;
 
+
 namespace Amazon.Repository
 {
-    public class MerchantRepository : IMerchantRepository
+    public  class MerchantRepository : IMerchantRepository
     {
         private readonly AmazonContext _context;
         public MerchantRepository(AmazonContext context)
@@ -11,13 +12,13 @@ namespace Amazon.Repository
             _context = context;
         }
 
-        public  async void DeleteMerchant(int MerchantId)
+        public  async Task DeleteMerchant(int MerchantId)
         {
             try
             {
                 Merchant merchant = _context.Merchants.Find(MerchantId);
                 _context.Merchants.Remove(merchant);
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
             }
             catch
             {
@@ -25,11 +26,11 @@ namespace Amazon.Repository
             }
         }
 
-        public IEnumerable<Merchant> GetMerchant()
+        public async Task<List<Merchant>> GetMerchant()
         {
             try
             {
-                return _context.Merchants.ToList();
+                return await _context.Merchants.ToListAsync();
             }
             catch
             {
@@ -38,32 +39,34 @@ namespace Amazon.Repository
             }
         }
 
-        public Merchant GetMerchantByID(int MerchantId)
+        public async Task<Merchant> GetMerchantByID(int MerchantId)
         {
-            try
-            {
-                return _context.Merchants.Find(MerchantId);
-            }
-            catch
-            {
-                throw new NotImplementedException();
 
-            }
+
+            return await _context.Merchants.FindAsync(MerchantId);
+            
+            
 
         }
 
-        public void InsertMerchant(Merchant Merchant)
+        public async Task<Merchant> InsertMerchant(Merchant merchant)
         {
-            _context.Merchants.Add(Merchant);
-            _context.SaveChanges();
+            _context.Merchants.Add(merchant);
+            await _context.SaveChangesAsync();
+            return merchant;
+
+
         }
 
-        
 
-        public void UpdateMerchant(int MerchantId, Merchant Merchant)
+
+        public async Task<Merchant> UpdateMerchant(int MerchantId, Merchant Merchant)
         {
-            _context.Entry(Merchant).State = EntityState.Modified;
+            //Merchant _merchant = await _context.Merchants.FindAsync(MerchantId);
+            _context.Update(Merchant);
             _context.SaveChanges();
+            return Merchant;
+
         }
     }
 }

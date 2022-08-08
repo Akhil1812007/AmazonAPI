@@ -7,6 +7,12 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllers();
+
+builder.Services.AddScoped<IProductProvider, ProductProvider>();
+
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
+
+
 builder.Services.AddScoped<IMerchantProvider, MerchantProvider>();
 
 builder.Services.AddScoped<IMerchantRepository,MerchantRepository>();

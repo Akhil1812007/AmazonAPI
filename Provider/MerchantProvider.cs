@@ -11,35 +11,38 @@ namespace Amazon.Provider
             _repository = repository;
         }
         
-        public void DeleteMerchant(int MerchantId)
+        public async Task DeleteMerchant(int MerchantId)
         {
-            _repository.DeleteMerchant(MerchantId); 
+            await _repository.DeleteMerchant(MerchantId); 
         }
 
-        public IEnumerable<Merchant> GetMerchant()
+        public async Task<List<Merchant>> GetMerchant()
         {
             
-             return _repository.GetMerchant();
+             return await _repository.GetMerchant();
            
         }
 
-        public Merchant GetMerchantByID(int MerchantId)
+        public async Task<Merchant> GetMerchantByID(int MerchantId)
         {
            
-             return _repository.GetMerchantByID(MerchantId);
+             return await _repository.GetMerchantByID(MerchantId);
+            
+
         
         }
 
-        public void InsertMerchant(Merchant Merchant)
+        public async Task<Merchant>  InsertMerchant(Merchant Merchant)
         {
-            _repository.InsertMerchant(Merchant);
+            await _repository.InsertMerchant(Merchant);
+            return Merchant;
         }
 
 
 
-        public void UpdateMerchant(int MerchantId, Merchant Merchant)
+        public async Task<Merchant> UpdateMerchant(int MerchantId, Merchant Merchant)
         {
-            _repository.UpdateMerchant(MerchantId, Merchant);
+            return await _repository.UpdateMerchant(MerchantId, Merchant);
             
             
         }

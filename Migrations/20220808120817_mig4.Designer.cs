@@ -4,6 +4,7 @@ using Amazon.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Amazon.Migrations
 {
     [DbContext(typeof(AmazonContext))]
-    partial class AmazonContextModelSnapshot : ModelSnapshot
+    [Migration("20220808120817_mig4")]
+    partial class mig4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -289,7 +291,7 @@ namespace Amazon.Migrations
                         .IsRequired();
 
                     b.HasOne("Amazon.Models.Product", "Product")
-                        .WithMany("Carts")
+                        .WithMany()
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -308,7 +310,7 @@ namespace Amazon.Migrations
                         .IsRequired();
 
                     b.HasOne("Amazon.Models.Product", "Product")
-                        .WithMany("Feedbacks")
+                        .WithMany()
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -327,7 +329,7 @@ namespace Amazon.Migrations
                         .IsRequired();
 
                     b.HasOne("Amazon.Models.Product", "Product")
-                        .WithMany("OrderDetails")
+                        .WithMany()
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -383,15 +385,6 @@ namespace Amazon.Migrations
 
             modelBuilder.Entity("Amazon.Models.OrderMaster", b =>
                 {
-                    b.Navigation("OrderDetails");
-                });
-
-            modelBuilder.Entity("Amazon.Models.Product", b =>
-                {
-                    b.Navigation("Carts");
-
-                    b.Navigation("Feedbacks");
-
                     b.Navigation("OrderDetails");
                 });
 #pragma warning restore 612, 618

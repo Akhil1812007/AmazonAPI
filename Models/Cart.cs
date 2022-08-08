@@ -19,6 +19,6 @@ namespace Amazon.Models
         public int CustomerId { get; set; }
 
 
-        public virtual Customer Customer { get; set; }
+        public virtual Customer? Customer { get; set; }
     }
 }
