@@ -9,5 +9,7 @@ namespace Amazon.Provider
         Task<Merchant> InsertMerchant(Merchant Merchant);
         Task DeleteMerchant(int MerchantId);
         Task<Merchant> UpdateMerchant(int MerchantId, Merchant merchant);
+        Task<Merchant>  MerchantLogin(Merchant merchant);
+
     }
 }

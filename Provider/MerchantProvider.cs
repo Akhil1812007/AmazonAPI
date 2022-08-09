@@ -37,8 +37,12 @@ namespace Amazon.Provider
             await _repository.InsertMerchant(Merchant);
             return Merchant;
         }
-
-
+        
+        public async Task<Merchant>  MerchantLogin(Merchant merchant)
+        {
+            return await _repository.MerchantLogin(merchant);
+                          
+        }
 
         public async Task<Merchant> UpdateMerchant(int MerchantId, Merchant Merchant)
         {
