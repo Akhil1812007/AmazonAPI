@@ -10,12 +10,11 @@ builder.Services.AddControllers();
 
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 
-
-
 builder.Services.AddScoped<IMerchantRepository,MerchantRepository>();
 
-
 builder.Services.AddScoped<IAdminRepository, AdminRepository>();
+builder.Services.AddScoped<ICartRepository, CartRepository>();
+
 
 
 

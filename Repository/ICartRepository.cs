@@ -7,7 +7,7 @@ namespace Amazon.Repository
         Task<Cart> AddToCart(Cart cart);
         Task DeleteFromCart(int id);
         Task<Cart> GetCartById(int id);
-        Task<List<Cart>> GetAllCart();
+        Task<List<Cart>> GetAllCart(int CustomerId);
         Task<Cart> ModifyCart(int id);
 
 
