@@ -7,7 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Amazon.Models;
 
-using Amazon.Provider;
+
+using Amazon.Repository;
 
 namespace Amazon.Controllers
 {
@@ -15,11 +16,11 @@ namespace Amazon.Controllers
     [ApiController]
     public class ProductController : ControllerBase
     {
-        private readonly IProductProvider _provider;
+        private readonly IProductRepository _repository;
 
-        public ProductController(IProductProvider provider)
+        public ProductController(IProductRepository repository)
         {
-            _provider = provider;
+            _repository = repository;
         }
 
         
@@ -27,28 +28,28 @@ namespace Amazon.Controllers
         public async Task<ActionResult<IEnumerable<Product>>> GetProducts()
         {
 
-            return await _provider.GetAllProduct();
+            return await _repository.GetAllProduct();
         }
 
         
        
         
-        [HttpPost("authenticate")]
+        [HttpPost("AddProduct")]
         public async Task<ActionResult<Product>> PostProduct(Product product)
         {
-            return await _provider.AddProduct(product);
+            return await _repository.AddProduct(product);
         }
 
         [HttpPut("{id}")]
         public async Task<ActionResult<Product>> PutProduct(int productId,Product product)
         {
-            return await _provider.EditProduct(productId,product);
+            return await _repository.EditProduct(productId,product);
 
         }
         [HttpDelete("id")]
         public async Task DeleteProduct(int id)
         {
-            await _provider.DeleteProduct(id);
+            await _repository.DeleteProduct(id);
         }
 
 

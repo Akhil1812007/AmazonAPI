@@ -15,10 +15,11 @@ namespace Amazon.Models
         [EmailAddress]
         public string? AdminEmail { get; set; }
         public string? AdminPassword { get; set; }
+
         [NotMapped]
 
         [Display(Name = "ConfirmPassword")]
-        [Compare("Password", ErrorMessage = "Passwords don not match")]
+        [Compare("AdminPassword", ErrorMessage = "Passwords don not match")]
 
         public string? AdminConfirmPassword { get; set; }
     }

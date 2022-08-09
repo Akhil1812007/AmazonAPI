@@ -43,7 +43,7 @@ namespace Amazon.Migrations
 
                     b.HasKey("AdminId");
 
-                    b.ToTable("Admin");
+                    b.ToTable("Admin", (string)null);
                 });
 
             modelBuilder.Entity("Amazon.Models.Cart", b =>
@@ -69,7 +69,7 @@ namespace Amazon.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("carts");
+                    b.ToTable("carts", (string)null);
                 });
 
             modelBuilder.Entity("Amazon.Models.Category", b =>
@@ -86,7 +86,7 @@ namespace Amazon.Migrations
 
                     b.HasKey("CategoryId");
 
-                    b.ToTable("Categories");
+                    b.ToTable("Categories", (string)null);
                 });
 
             modelBuilder.Entity("Amazon.Models.Customer", b =>
@@ -126,7 +126,7 @@ namespace Amazon.Migrations
 
                     b.HasKey("CustomerId");
 
-                    b.ToTable("Customers");
+                    b.ToTable("Customers", (string)null);
                 });
 
             modelBuilder.Entity("Amazon.Models.Feedback", b =>
@@ -153,7 +153,7 @@ namespace Amazon.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("Feedbacks");
+                    b.ToTable("Feedbacks", (string)null);
                 });
 
             modelBuilder.Entity("Amazon.Models.Merchant", b =>
@@ -183,7 +183,7 @@ namespace Amazon.Migrations
 
                     b.HasKey("MerchantId");
 
-                    b.ToTable("Merchants");
+                    b.ToTable("Merchants", (string)null);
                 });
 
             modelBuilder.Entity("Amazon.Models.OrderDetail", b =>
@@ -212,7 +212,7 @@ namespace Amazon.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("OrderDetails");
+                    b.ToTable("OrderDetails", (string)null);
                 });
 
             modelBuilder.Entity("Amazon.Models.OrderMaster", b =>
@@ -242,7 +242,7 @@ namespace Amazon.Migrations
 
                     b.HasIndex("CustomerId");
 
-                    b.ToTable("OrderMasters");
+                    b.ToTable("OrderMasters", (string)null);
                 });
 
             modelBuilder.Entity("Amazon.Models.Product", b =>
@@ -277,7 +277,7 @@ namespace Amazon.Migrations
 
                     b.HasIndex("MerchantId");
 
-                    b.ToTable("Products");
+                    b.ToTable("Products", (string)null);
                 });
 
             modelBuilder.Entity("Amazon.Models.Cart", b =>

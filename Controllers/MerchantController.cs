@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Amazon.Models;
-using Amazon.Provider;
+using Amazon.Repository;
 
 namespace Amazon.Controllers
 {
@@ -14,38 +14,38 @@ namespace Amazon.Controllers
     [ApiController]
     public class MerchantController : ControllerBase
     {
-        private readonly IMerchantProvider _provider;
+        private readonly IMerchantRepository _repository;
 
-        public MerchantController(IMerchantProvider provider)
+        public MerchantController(IMerchantRepository repository)
         {
-            _provider = provider;
+            _repository = repository;
 
         }
 
         [HttpGet]
         public async Task<ActionResult<List<Merchant>>> GetMerchants()
         {
-            return await _provider.GetMerchant();
+            return await _repository.GetMerchant();
         }
 
         
         [HttpGet("{id}")]
         public async Task<ActionResult<Merchant>> GetMerchant(int id)
         {
-          return await _provider.GetMerchantByID(id);
+          return await _repository.GetMerchantByID(id);
         }
 
         [HttpPut("{id}")]
         public async Task<ActionResult<Merchant>> PutMerchant(int id, Merchant merchant)
         {
-            return await _provider.UpdateMerchant(id, merchant);
+            return await _repository.UpdateMerchant(id, merchant);
            
         }
 
         [HttpPost]
         public async Task<ActionResult<Merchant>> PostMerchant(Merchant merchant)
         {
-            return await _provider.InsertMerchant(merchant);
+            return await _repository.InsertMerchant(merchant);
              
           
         }
@@ -54,15 +54,15 @@ namespace Amazon.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteMerchant(int id)
         {
-            await _provider?.DeleteMerchant(id);  
+            await _repository?.DeleteMerchant(id);  
 
             return NoContent();
         }
-        [Route("action")]
+        [Route("MerchantLogin")]
         [HttpPost]
         public async Task<ActionResult<Merchant>> MerchantLogin(Merchant merchant)
         {
-            var ans = await _provider.MerchantLogin(merchant);
+            var ans = await _repository.MerchantLogin(merchant);
             return Ok(ans);
         }
 
