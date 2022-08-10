@@ -32,7 +32,7 @@ namespace Amazon.Models
         [NotMapped]
 
         [Display(Name = "ConfirmPassword")]
-        [Compare("Password", ErrorMessage = "Passwords don not match")]
+        [Compare("CustomerPassword", ErrorMessage = "Passwords don not match")]
 
         public string? ConfirmPassword { get; set; }
         public ICollection<Feedback>? Feedbacks { get; set; }

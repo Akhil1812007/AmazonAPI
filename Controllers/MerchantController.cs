@@ -58,13 +58,12 @@ namespace Amazon.Controllers
 
             return NoContent();
         }
-        [Route("MerchantLogin")]
-        [HttpPost]
-        public async Task<ActionResult<Merchant>> MerchantLogin(Merchant merchant)
-        {
-            var ans = await _repository.MerchantLogin(merchant);
-            return Ok(ans);
-        }
+        //[Route("MerchantLogin")]
+        //[HttpPost]
+        //public async Task<ActionResult<Merchant>> MerchantLogin(Merchant merchant)
+        //{
+         
+        //}
 
         
 

@@ -69,18 +69,7 @@ namespace Amazon.Repository
                 return false;
             }
         }
-        public async Task<Merchant> MerchantLogin(Merchant merchant) 
-        {
-            if (IsMerchant(merchant.MerchantId))
-            {
-                return  merchant;
-            }
-            else
-            {
-                throw new NotImplementedException();
-
-            }
-        }
+     
 
         public async Task<Merchant> UpdateMerchant(int MerchantId, Merchant Merchant)
         {

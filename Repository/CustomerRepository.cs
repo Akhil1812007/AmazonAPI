@@ -18,30 +18,10 @@ namespace Amazon.Repository
             return customer;
 
         }
-        private bool IsCustomer(int id)
+        public  async Task<Customer> CustomerLogin(Customer c)
         {
-            var isCustomer = _context.Customers.Find(id);
-            if (isCustomer != null)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-        public async Task<Customer> CustomerLogin(Customer customer)
-        {
-            if (IsCustomer(customer.CustomerId))
-            {
-                return customer;
-            }
-            else
-            {
-                throw new NotImplementedException();
-
-            }
+            var customer=( from i in _context.Customers where i.CustomerEmail == c.CustomerEmail  && i.CustomerPassword== c.CustomerPassword select i).FirstOrDefault();
+            return customer;
         }
 
         public async Task<Customer> GetCustomerById(int id)
@@ -54,6 +34,13 @@ namespace Amazon.Repository
             _context.Update(customer);
             await _context.SaveChangesAsync();
             return  customer;
+        }
+
+        public async Task<Feedback> AddFeedback(Feedback feedback)
+        {
+            _context.Feedbacks.Add(feedback);
+            await _context.SaveChangesAsync();
+            return feedback;
         }
     }
 }
