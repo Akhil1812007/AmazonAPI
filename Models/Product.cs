@@ -12,16 +12,16 @@ namespace Amazon.Models
         public string? ProductName { get; set; }
 
         [Range(0, int.MaxValue, ErrorMessage = "Value must be greater than 0")]
-        public int UnitPrice { get; set; }
+        public int? UnitPrice { get; set; }
         public string? ProductImage { get; set; }
 
         [ForeignKey("CategoryId")]
-        public int CategoryId { get; set; }
+        public int? CategoryId { get; set; }
     
         public virtual Category? Category { get; set; }
 
         [ForeignKey("MerchantId")]
-        public int MerchantId { get; set; }
+        public int? MerchantId { get; set; }
         public virtual Merchant? Merchant { get; set; }
 
         public virtual ICollection<Feedback>? Feedbacks { get; set; }

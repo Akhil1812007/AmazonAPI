@@ -41,10 +41,16 @@ namespace Amazon.Controllers
         {
             return await _repository.ModifyCart(id);
         }
+        [HttpPost]
+        public async Task<ActionResult<Cart>> AddCart(Cart cart)
+        {
+            
+            return await _repository.AddToCart(cart);
+        }
 
 
-       
 
-        
+
+
     }
 }
