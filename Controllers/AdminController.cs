@@ -13,17 +13,17 @@ namespace Amazon.Controllers
         {
             _repository = repository;
         }
-        [HttpPost("AddAdmin")]
+        [HttpPost("{admin}")]
         public async Task<ActionResult<Admin>> PostAdmin(Admin admin)
         {
             return await _repository.AddAdmin(admin);
         }
-        [HttpPost("AddCategory")]
+        [HttpPost("{category}")]
         public async Task<ActionResult<Category>> PostCategory(Category category)
         {
             return await _repository.AddCategory(category);
         }
-        [HttpPost("DeleteCategory")]
+        [HttpPost("{CategoryId}")]
         public async Task DeleteCategory(int  CategoryId)
         {
              await _repository.DeleteCategory(CategoryId);

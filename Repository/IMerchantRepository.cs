@@ -9,9 +9,10 @@ namespace Amazon.Repository
         Task<Merchant> InsertMerchant(Merchant Merchant);
         Task DeleteMerchant(int MerchantId);
         Task<Merchant> UpdateMerchant(int MerchantId,Merchant merchant);
+        Task<Merchant> MerchantLogin(Merchant merchant);
 
-      
 
-       
+
+
     }
 }

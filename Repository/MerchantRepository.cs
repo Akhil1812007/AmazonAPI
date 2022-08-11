@@ -79,5 +79,10 @@ namespace Amazon.Repository
             return Merchant;
 
         }
+        public async Task<Merchant> MerchantLogin(Merchant m)
+        {
+            var merchant = (from i in _context.Merchants where i.MerchantEmail == m.MerchantEmail && i.MerchantPassword == m.MerchantPassword select i).FirstOrDefault();
+            return merchant;
+        }
     }
 }

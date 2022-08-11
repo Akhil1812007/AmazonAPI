@@ -12,6 +12,7 @@ namespace Amazon.Repository
 
         public async  Task<OrderDetail> AddOrderDetail(OrderDetail orderDetail)
         {
+            
             _context.Add(orderDetail);
             await _context.SaveChangesAsync();
             return orderDetail;
@@ -26,21 +27,21 @@ namespace Amazon.Repository
 
         public async Task<OrderDetail> GetOrderDetailById(int orderDetailId)
         {
-            var od = _context.OrderDetails.Find(orderDetailId);
+            var od = await _context.OrderDetails.FindAsync(orderDetailId);
             return od;
         }
 
         public async  Task<OrderMaster> GetOrderMasterById(int orderMasterId)
         {
 
-            var od = _context.OrderMasters.Find(orderMasterId);
+            var od = await _context.OrderMasters.FindAsync(orderMasterId);
             return od;
         }
        
         public async  Task<OrderMaster> UpdateOrderMaster(int orderMasterId, OrderMaster orderMaster)
         {
-            _context.Update(orderMaster);
-            _context.SaveChanges();
+             _context.Update(orderMaster);
+            await _context.SaveChangesAsync();
             return orderMaster;
         }
     }

@@ -1,4 +1,4 @@
-﻿using System;
+﻿ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -22,21 +22,22 @@ namespace Amazon.Controllers
         }
 
         //getting all carts of a particular customer
-        [HttpGet]
-        public async Task<ActionResult<List<Cart>>> Getcarts(int id)
+        [HttpGet("{id}")]
+        public async Task<ActionResult<List<Cart>>>? Getcarts(int id)
         {
-         
-            return await _repository.GetAllCart(id);
+            List<Cart> result = (List<Cart>)await _repository.GetAllCart(id);
+            
+            return result;
         }
         //delete a cart
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteCart(int id)
         {
              await _repository.DeleteFromCart(id);
             return NoContent();
            
         }
-        [HttpPut]
+        [HttpPut("{id}")]
         public async Task<ActionResult<Cart>> updateCart(int id)
         {
             return await _repository.ModifyCart(id);
@@ -44,6 +45,7 @@ namespace Amazon.Controllers
         [HttpPost]
         public async Task<ActionResult<Cart>> AddCart(Cart cart)
         {
+            
             
             return await _repository.AddToCart(cart);
         }

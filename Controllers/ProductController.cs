@@ -34,13 +34,13 @@ namespace Amazon.Controllers
         
        
         
-        [HttpPost("AddProduct")]
+        [HttpPost("{product}")]
         public async Task<ActionResult<Product>> PostProduct(Product product)
         {
             return await _repository.AddProduct(product);
         }
 
-        [HttpPut("{id}")]
+        [HttpPut("putProduct")]
         public async Task<ActionResult<Product>> PutProduct(int productId,Product product)
         {
             return await _repository.EditProduct(productId,product);

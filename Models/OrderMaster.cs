@@ -20,6 +20,6 @@ namespace Amazon.Models
         public int? CustomerId { get; set; }
 
         public virtual Customer? Customer { get; set; }
-        public ICollection<OrderDetail>? OrderDetails { get; set; }
+        public List<OrderDetail>? OrderDetails { get; set; }
     }
 }
