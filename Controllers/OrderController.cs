@@ -20,10 +20,7 @@ namespace Amazon.Controllers
             _cartRepository = cartRepository;
             
         }
-        //public OrderController(ICartRepository cartRepository)
-        //{
-        //    _cartRepository = cartRepository;
-        //}
+        
 
         [HttpGet("{id}")]
         public async Task<ActionResult<OrderMaster>> GetOrderMaster(int id)
@@ -63,12 +60,7 @@ namespace Amazon.Controllers
         public async Task Buy(int customerId)
         {
 
-
             List<Cart> c =  await _cartRepository.GetAllCart(customerId);
-
-
-           // List<OrderDetail> orderItems = new List<OrderDetail>();
-
             OrderMaster om = new OrderMaster();
             om.OrderDate = DateTime.Today;
             om.CustomerId = customerId;
@@ -77,10 +69,7 @@ namespace Amazon.Controllers
             {
                 foreach (var cart in c)
                 {
-                    int price = (int)cart.Product.UnitPrice;
-
-
-                    om.total +=  (cart.ProductQuantity *price);
+                    om.total +=  (cart.ProductQuantity * cart.Product.UnitPrice);
                 }
             }
             await _orderRepository.AddOrderMaster(om);
