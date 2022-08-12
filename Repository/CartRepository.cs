@@ -15,9 +15,17 @@ namespace Amazon.Repository
 
         public async  Task<Cart>? AddToCart(Cart cart)
         {
-           _context.carts.Add(cart);
-            await _context.SaveChangesAsync();
-            return cart;
+            if (isCartExist(cart))
+            {
+                return cart;
+            }
+            else
+            {
+                _context.carts.Add(cart);
+                await _context.SaveChangesAsync();
+                return cart;
+            }
+            
         }
        
         public async  Task DeleteFromCart(int id)
@@ -40,13 +48,30 @@ namespace Amazon.Repository
 
         public async  Task<Cart> GetCartById(int cartid)
         {
-            var result= (from c in _context.carts.Include(x => x.Product) where c.CartId == cartid select c).SingleOrDefault();
+            var result= await (from c in _context.carts.Include(x => x.Product) where c.CartId == cartid select c).SingleAsync();
             return result;
         }
-
-        public Task<Cart> ModifyCart(int id)
+        private bool isCartExist(Cart ct)
         {
-            throw new NotImplementedException();
+            var cart = ( from  c in _context.carts where c.ProductId==ct.ProductId && c.CustomerId==ct.CustomerId select c).FirstOrDefault();
+            cart.ProductQuantity=ct.ProductQuantity;
+            if(cart == null)
+            {
+                return false;
+            }
+            else
+            {
+                UpdateCart(cart.CartId, cart);
+                    
+                return true;
+            }
+        }
+        public async  Task<Cart> UpdateCart(int id,Cart c)
+        {
+            _context.Update(c);
+            await _context.SaveChangesAsync();
+            return c;
+
         }
     }
 }

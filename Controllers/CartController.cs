@@ -38,9 +38,9 @@ namespace Amazon.Controllers
            
         }
         [HttpPut("{id}")]
-        public async Task<ActionResult<Cart>> updateCart(int id)
+        public async Task<ActionResult<Cart>> updateCart(int id,Cart cart)
         {
-            return await _repository.ModifyCart(id);
+            return await _repository.UpdateCart(id,cart);
         }
         [HttpPost]
         public async Task<ActionResult<Cart>> AddCart(Cart cart)
