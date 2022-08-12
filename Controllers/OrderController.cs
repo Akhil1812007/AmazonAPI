@@ -81,7 +81,6 @@ namespace Amazon.Controllers
                 detail.ProductRate = item.Product.UnitPrice;
                 detail.OrderMasterId = om.OrderMasterId;
                 await _orderRepository.AddOrderDetail(detail);
-                await _cartRepository.DeleteFromCart(item.CartId);
             }
         }
 

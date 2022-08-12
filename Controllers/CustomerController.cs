@@ -35,13 +35,8 @@ namespace Amazon.Controllers
         {
             return await _repository.AddCustomer(customer);
 
-
         }
 
-
-       
-        
-        
         [HttpPost("Feedback")]
         public async Task<ActionResult<Feedback>> PostFeedback(Feedback feedback)
         {

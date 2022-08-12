@@ -40,9 +40,30 @@ namespace Amazon.Repository
        
         public async  Task<OrderMaster> UpdateOrderMaster(int orderMasterId, OrderMaster orderMaster)
         {
-             _context.Update(orderMaster);
-            await _context.SaveChangesAsync();
-            return orderMaster;
+            if (orderMaster.AmountPaid == orderMaster.total)
+            {
+                _context.Update(orderMaster);
+                await _context.SaveChangesAsync();
+                List<Cart> c=(from i in _context.carts where i.CustomerId==orderMaster.CustomerId select i).ToList();
+                foreach (Cart cart in c)
+                {
+                    _context.Remove(cart);
+                }
+                return orderMaster;                       
+            }
+            else
+            {
+               List<OrderDetail> od = (from i in _context.OrderDetails where i.OrderMasterId==orderMasterId select i).ToList();
+                foreach (OrderDetail item in od)
+                {
+                    _context.Remove(item);
+                }
+
+
+                _context.Remove(orderMaster);
+                await _context.SaveChangesAsync();
+                return null;
+            }
         }
     }
 }

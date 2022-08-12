@@ -31,11 +31,9 @@ namespace Amazon.Repository
         public async  Task DeleteFromCart(int id)
         {
             
-            
                 Cart? cart = _context.carts.Find(id);
                 _context.carts.Remove(cart);
                 await _context.SaveChangesAsync();
-            
             
         }
 

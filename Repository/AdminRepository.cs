@@ -52,10 +52,9 @@ namespace Amazon.Repository
             }
         }
 
-        public async Task<Admin> EditAdmin(int AdminId)
+        public async Task<Admin> EditAdmin(int AdminId,Admin admin)
         {
 
-            Admin admin = await _context.Admin.FindAsync(AdminId);
             _context.Update(admin);
             _context.SaveChanges();
             return admin;
