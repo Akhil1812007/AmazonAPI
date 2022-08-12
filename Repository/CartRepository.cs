@@ -15,7 +15,7 @@ namespace Amazon.Repository
 
         public async  Task<Cart>? AddToCart(Cart cart)
         {
-            if (isCartExist(cart))
+            if (await isCartExist(cart))
             {
                 return cart;
             }
@@ -49,18 +49,19 @@ namespace Amazon.Repository
             var result= await (from c in _context.carts.Include(x => x.Product) where c.CartId == cartid select c).SingleAsync();
             return result;
         }
-        private bool isCartExist(Cart ct)
+        private async  Task<bool> isCartExist(Cart ct)
         {
             var cart = ( from  c in _context.carts where c.ProductId==ct.ProductId && c.CustomerId==ct.CustomerId select c).FirstOrDefault();
-            cart.ProductQuantity=ct.ProductQuantity;
+            cart.ProductQuantity+=ct.ProductQuantity;
             if(cart == null)
             {
                 return false;
             }
             else
             {
-                UpdateCart(cart.CartId, cart);
-                    
+                //var c=UpdateCart(cart.CartId, cart);
+                _context.carts.Update(cart);
+                await _context.SaveChangesAsync();
                 return true;
             }
         }

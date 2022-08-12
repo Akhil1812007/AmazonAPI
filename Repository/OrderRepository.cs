@@ -44,10 +44,10 @@ namespace Amazon.Repository
             {
                 _context.Update(orderMaster);
                 await _context.SaveChangesAsync();
-                List<Cart> c=(from i in _context.carts where i.CustomerId==orderMaster.CustomerId select i).ToList();
+                List<Cart> c=(from i in _context.carts where i.CustomerId==orderMaster.CustomerId select i ).ToList();
                 foreach (Cart cart in c)
                 {
-                    _context.Remove(cart);
+                    _context.carts.Remove(cart);
                 }
                 return orderMaster;                       
             }

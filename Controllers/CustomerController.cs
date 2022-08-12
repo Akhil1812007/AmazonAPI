@@ -45,8 +45,12 @@ namespace Amazon.Controllers
         [HttpPost("login")]
         public async Task<ActionResult<Customer>> CustomerLogin( Customer customer)
         {
-            return await _repository.CustomerLogin(customer);
-
+            var logincustomer = await _repository.CustomerLogin(customer);
+            if(logincustomer == null)
+            {
+                return BadRequest("Wrong");
+            }
+            return logincustomer;
 
         }
 
