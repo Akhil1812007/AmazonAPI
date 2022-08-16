@@ -50,6 +50,7 @@ namespace Amazon.Repository
                 {
                     Product p = (from j in _context.Products where j.ProductId == cart.ProductId select j).Single();
                     p.ProductQnt -= cart.ProductQuantity;
+                    _context.Update(p);
 
                     _context.carts.Remove(cart);
                 }
