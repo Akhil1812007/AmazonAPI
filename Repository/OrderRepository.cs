@@ -50,23 +50,15 @@ namespace Amazon.Repository
                 {
                     Product p = (from j in _context.Products where j.ProductId == cart.ProductId select j).Single();
                     p.ProductQnt -= cart.ProductQuantity;
-                    _context.Update(p);
+                    _context.Products.Update(p);
 
                     _context.carts.Remove(cart);
+                    _context.SaveChanges(); 
                 }
                 return orderMaster;                       
             }
             else
             {
-               List<OrderDetail> od = (from i in _context.OrderDetails where i.OrderMasterId==orderMasterId select i).ToList();
-                foreach (OrderDetail item in od)
-                {
-                    _context.Remove(item);
-                }
-
-
-                _context.Remove(orderMaster);
-                await _context.SaveChangesAsync();
                 return null;
             }
         }

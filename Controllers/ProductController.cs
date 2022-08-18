@@ -9,6 +9,7 @@ using Amazon.Models;
 
 
 using Amazon.Repository;
+using Microsoft.AspNetCore.JsonPatch;
 
 namespace Amazon.Controllers
 {
@@ -34,22 +35,39 @@ namespace Amazon.Controllers
         
        
         
-        [HttpPost("{product}")]
+        [HttpPost("product")]
         public async Task<ActionResult<Product>> PostProduct(Product product)
         {
             return await _repository.AddProduct(product);
         }
 
-        [HttpPut("putProduct")]
-        public async Task<ActionResult<Product>> PutProduct(int productId,Product product)
+        [HttpPut("{product}")]
+        public async Task<ActionResult<Product>> PutProduct(Product product)
         {
-            return await _repository.EditProduct(productId,product);
+            return await _repository.EditProduct(product);
 
         }
-        [HttpDelete("id")]
+        [HttpPatch("{id}")]
+        public async Task PatchProduct([FromBody] JsonPatchDocument product, [FromRoute] int id)
+        {
+             await _repository.PatchProduct(product, id);
+
+        }
+
+
+
+
+
+
+        [HttpDelete("{id}")]
         public async Task DeleteProduct(int id)
         {
             await _repository.DeleteProduct(id);
+        }
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Product>> GetProductById(int id)
+        {
+            return await _repository.GetProductById(id);
         }
 
 

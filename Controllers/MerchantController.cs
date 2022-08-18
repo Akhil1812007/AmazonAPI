@@ -27,8 +27,13 @@ namespace Amazon.Controllers
         {
             return await _repository.GetMerchant();
         }
+        [HttpGet("MerchantId")]
+        public async Task<ActionResult<List<Product>>> GetProductByMerchantId(int MerchantId)
+        {
+            return await _repository.GetProductByMerchantId(MerchantId);
+        }
 
-        
+
         [HttpGet("{id}")]
         public async Task<ActionResult<Merchant>> GetMerchant(int id)
         {
@@ -61,7 +66,16 @@ namespace Amazon.Controllers
         [HttpPost("MerchantLogin")]
         public async Task<ActionResult<Merchant>> MerchantLogin(Merchant m)
         {
-            return await _repository.MerchantLogin(m);
+           Merchant ml= await _repository.MerchantLogin(m);
+
+            if (ml == null)
+            {
+                return BadRequest();
+            }
+            else
+            {
+                return ml;
+            }
 
 
         }

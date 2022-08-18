@@ -11,6 +11,7 @@ namespace Amazon.Repository
         Task<Merchant> UpdateMerchant(int MerchantId,Merchant merchant);
         Task<Merchant> MerchantLogin(Merchant merchant);
 
+        Task<List<Product>> GetProductByMerchantId(int id);
 
 
 

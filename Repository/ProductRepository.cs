@@ -1,4 +1,5 @@
 ﻿using Amazon.Models;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.EntityFrameworkCore;
 
 namespace Amazon.Repository
@@ -33,7 +34,7 @@ namespace Amazon.Repository
             }
         }
 
-        public async Task<Product> EditProduct(int ProductId,Product product)
+        public async Task<Product> EditProduct(Product product)
         {
             _context.Update(product);
             await  _context.SaveChangesAsync();
@@ -43,7 +44,7 @@ namespace Amazon.Repository
         {
             try
             {
-                return await _context.Products.ToListAsync();
+                return await _context.Products.Include(x=>x.Category).ToListAsync();
             }
             catch
             {
@@ -51,6 +52,25 @@ namespace Amazon.Repository
 
             }
 
+        }
+        public async Task<Product> GetProductById(int id)
+        {
+
+
+            return await _context.Products.FindAsync(id);
+
+
+
+        }
+
+        public async Task PatchProduct(JsonPatchDocument product, int id)
+        {
+            var P = _context.Products.FindAsync(id);
+            if (product != null)
+            {
+                product.ApplyTo(P);
+                await _context.SaveChangesAsync();  
+            }
         }
     }
 }

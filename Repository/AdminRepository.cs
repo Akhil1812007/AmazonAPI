@@ -1,4 +1,5 @@
 ﻿using Amazon.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Amazon.Repository
 {
@@ -59,6 +60,18 @@ namespace Amazon.Repository
             _context.SaveChanges();
             return admin;
 
+        }
+        public async Task<List<Category>> GetAllCategories()
+        {
+            try
+            {
+                return await _context.Categories.ToListAsync();
+            }
+            catch
+            {
+                throw new NotImplementedException();
+
+            }
         }
     }
 }

@@ -41,12 +41,13 @@ namespace Amazon.Repository
 
         public async Task<Merchant> GetMerchantByID(int MerchantId)
         {
-
-
             return await _context.Merchants.FindAsync(MerchantId);
-            
-            
-
+          
+        }
+        public async Task<List<Product>> GetProductByMerchantId(int MerchantId)
+        {
+            var products = await (from i in _context.Products.Include(x=>x.Category).Include(y=>y.Merchant) where i.MerchantId == MerchantId select i).ToListAsync();
+            return products;
         }
 
         public async Task<Merchant> InsertMerchant(Merchant merchant)

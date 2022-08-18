@@ -28,6 +28,11 @@ namespace Amazon.Controllers
         {
              await _repository.DeleteCategory(CategoryId);
         }
+        [HttpGet("GetAllCategory")]
+        public async Task<ActionResult<List<Category>>> GetAllCategory()
+        {
+            return await _repository.GetAllCategories();
+        }
 
 
     }

@@ -11,15 +11,14 @@ namespace Amazon.Models
         [Required(ErrorMessage = "Field can't be empty")]
         [DataType(DataType.EmailAddress, ErrorMessage = "E-mail is not valid")]
         public string? MerchantEmail { get; set; }
-        [Required]
+        
         public string? MerchantName { get; set; }
 
         [DataType(DataType.PhoneNumber)]
         [Display(Name = "Phone Number")]
-        [Required(ErrorMessage = "Phone Number Required!")]
 
         public string? MerchantPhoneNumber { get; set; }
-        [Required(ErrorMessage = "Please enter password"), MaxLength(20)]
+        [Display(Name = "Please enter password"), MaxLength(20)]
         public string? MerchantPassword { get; set; }
         [NotMapped]
 

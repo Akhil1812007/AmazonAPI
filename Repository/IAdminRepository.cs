@@ -9,5 +9,6 @@ namespace Amazon.Repository
         Task DeleteAdmin(int AdminId);   
         Task<Category> AddCategory(Category category);
         Task DeleteCategory(int CategoryId);
+        Task<List<Category>> GetAllCategories();
     }
 }

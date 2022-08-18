@@ -52,7 +52,6 @@ namespace Amazon.Repository
         private async  Task<bool> isCartExist(Cart ct)
         {
             var cart = ( from  c in _context.carts where c.ProductId==ct.ProductId && c.CustomerId==ct.CustomerId select c).FirstOrDefault();
-            cart.ProductQuantity+=ct.ProductQuantity;
             if(cart == null)
             {
                 return false;
@@ -60,6 +59,8 @@ namespace Amazon.Repository
             else
             {
                 //var c=UpdateCart(cart.CartId, cart);
+                cart.ProductQuantity += ct.ProductQuantity;
+
                 _context.carts.Update(cart);
                 await _context.SaveChangesAsync();
                 return true;
