@@ -51,7 +51,7 @@ namespace Amazon.Repository
         }
         private async  Task<bool> isCartExist(Cart ct)
         {
-            var cart = ( from  c in _context.carts where c.ProductId==ct.ProductId && c.CustomerId==ct.CustomerId select c).FirstOrDefault();
+              var cart = ( from  c in _context.carts where c.ProductId==ct.ProductId && c.CustomerId==ct.CustomerId select c).FirstOrDefault();
             if(cart == null)
             {
                 return false;

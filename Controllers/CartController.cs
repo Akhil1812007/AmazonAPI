@@ -21,34 +21,35 @@ namespace Amazon.Controllers
             _repository = repository;
         }
 
-        //getting all carts of a particular customer
+        //getting all carts of a particular customer by using the customer id
         [HttpGet("{id}")]
-        public async Task<ActionResult<List<Cart>>>? Getcarts(int id)
+        public async Task<ActionResult<List<Cart>>>? Getcarts(int id) // id=customer id
         {
-            List<Cart> result = (List<Cart>)await _repository.GetAllCart(id);
-            
+            List<Cart> result = await _repository.GetAllCart(id);
+
             return result;
         }
         //delete a cart
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteCart(int id)
         {
-             await _repository.DeleteFromCart(id);
+            await _repository.DeleteFromCart(id);
             return NoContent();
-           
+
         }
         [HttpPut("{id}")]
-        public async Task<ActionResult<Cart>> updateCart(int id,Cart cart)
+        public async Task<ActionResult<Cart>> updateCart(int id, Cart cart)
         {
-            return await _repository.UpdateCart(id,cart);
+            return await _repository.UpdateCart(id, cart);
         }
         [HttpPost]
         public async Task<ActionResult<Cart>> AddCart(Cart cart)
         {
-            
-            
+
+
             return await _repository.AddToCart(cart);
         }
+       
 
 
 
