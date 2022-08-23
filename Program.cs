@@ -14,6 +14,7 @@ ConfigurationManager configuration = builder.Configuration;
 
 
 // Add services to the container.
+//--------------------------
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -35,6 +36,7 @@ builder.Services.AddAuthentication(options =>
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JWT:Secret"]))
     };
 });
+//------------------------------------------
 builder.Services.AddControllers();
 
 
@@ -52,6 +54,7 @@ builder.Services.AddScoped < IEmailService, EmailService>();
 builder.Services.AddDbContext<AmazonContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddEndpointsApiExplorer();
+//-----------------------------------------------------------------------------
 builder.Services.AddSwaggerGen(option =>
 {
     option.SwaggerDoc("v1", new OpenApiInfo { Title = "Demo API", Version = "v1" });
@@ -79,6 +82,7 @@ builder.Services.AddSwaggerGen(option =>
         }
     });
 });
+//-----------------------------------------------------------------------
 builder.Services.AddControllers().AddJsonOptions(options =>
 {
     options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
