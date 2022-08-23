@@ -1,16 +1,22 @@
 ﻿using Amazon.Models;
+using AmazonAPI.Models;
 using Microsoft.EntityFrameworkCore;
-
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
 
 namespace Amazon.Repository
 {
     public  class MerchantRepository : IMerchantRepository
     {
         private readonly AmazonContext _context;
-        public MerchantRepository(AmazonContext context)
+        private readonly IConfiguration _configuration;
+        public MerchantRepository(AmazonContext context,IConfiguration configuration)
         {
             _context = context;
-        }
+            _configuration = configuration;
+    }
 
         public  async Task DeleteMerchant(int MerchantId)
         {
@@ -80,10 +86,43 @@ namespace Amazon.Repository
             return Merchant;
 
         }
-        public async Task<Merchant> MerchantLogin(Merchant m)
+        public async Task<MerchantToken> MerchantLogin(Merchant m)
         {
+            MerchantToken mt=new MerchantToken();
             var merchant =await  (from i in _context.Merchants where i.MerchantEmail == m.MerchantEmail && i.MerchantPassword == m.MerchantPassword select i).FirstOrDefaultAsync();
-            return merchant;
+            if (merchant != null)
+            {
+                var authClaims = new List<Claim>
+                {
+                    new Claim(ClaimTypes.Name, merchant.MerchantEmail),
+                    new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                };
+
+
+                var token = GetToken(authClaims);
+                string s= new JwtSecurityTokenHandler().WriteToken(token);
+                mt.merchantToken = s;
+                mt.merchant=merchant;
+                return mt;
+
+            }
+            return null;
+        }
+
+        private JwtSecurityToken GetToken(List<Claim> authClaims)
+        {
+            var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:Secret"]));
+
+            var token = new JwtSecurityToken(
+                issuer: _configuration["JWT:ValidIssuer"],
+                audience: _configuration["JWT:ValidAudience"],
+                expires: DateTime.Now.AddMinutes(30),
+                claims: authClaims,
+                signingCredentials: new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256)
+                ); ;
+
+            return token;
         }
     }
-}
+    }
+

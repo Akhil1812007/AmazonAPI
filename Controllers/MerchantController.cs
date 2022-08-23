@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Amazon.Models;
 using Amazon.Repository;
+using Microsoft.AspNetCore.Authorization;
+using AmazonAPI.Models;
 
 namespace Amazon.Controllers
 {
@@ -65,18 +67,16 @@ namespace Amazon.Controllers
             return NoContent();
         }
         [HttpPost("MerchantLogin")]
-        public async Task<ActionResult<Merchant>> MerchantLogin(Merchant m)
+        public async Task<ActionResult<MerchantToken>> MerchantLogin(Merchant m)
         {
-           Merchant ml= await _repository.MerchantLogin(m);
+           MerchantToken ml= await _repository.MerchantLogin(m);
 
-            if (ml == null)
+            if (string.IsNullOrEmpty(ml.merchantToken))
             {
-                return BadRequest();
+                return Unauthorized();
             }
-            else
-            {
-                return ml;
-            }
+
+            return Ok(ml);
 
 
         }

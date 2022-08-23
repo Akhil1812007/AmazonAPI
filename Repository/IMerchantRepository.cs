@@ -1,4 +1,5 @@
 ﻿using Amazon.Models;
+using AmazonAPI.Models;
 
 namespace Amazon.Repository
 {
@@ -9,7 +10,7 @@ namespace Amazon.Repository
         Task<Merchant> InsertMerchant(Merchant Merchant);
         Task DeleteMerchant(int MerchantId);
         Task<Merchant> UpdateMerchant(int MerchantId,Merchant merchant);
-        Task<Merchant> MerchantLogin(Merchant merchant);
+        Task<MerchantToken> MerchantLogin(Merchant merchant);
 
         Task<List<Product>> GetProductByMerchantId(int id);
 

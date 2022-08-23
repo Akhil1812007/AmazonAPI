@@ -10,9 +10,11 @@ using Amazon.Models;
 
 using Amazon.Repository;
 using Microsoft.AspNetCore.JsonPatch;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Amazon.Controllers
 {
+    
     [Route("api/[controller]")]
     [ApiController]
     public class ProductController : ControllerBase
@@ -32,9 +34,9 @@ namespace Amazon.Controllers
             return await _repository.GetAllProduct();
         }
 
-        
-       
-        
+
+
+        [Authorize]
         [HttpPost("product")]
         public async Task<ActionResult<Product>> PostProduct(Product product)
         {

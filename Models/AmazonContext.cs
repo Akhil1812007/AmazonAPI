@@ -8,6 +8,7 @@ namespace Amazon.Models
         {
 
         }
+        
         public DbSet<Merchant> Merchants { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Customer> Customers { get; set; }
