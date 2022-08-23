@@ -38,7 +38,7 @@ namespace Amazon.Repository
             return od;
         }
        
-        public async  Task<OrderMaster> UpdateOrderMaster(int orderMasterId, OrderMaster orderMaster)
+        public async  Task<OrderMaster> UpdateOrderMaster( OrderMaster orderMaster)
         {
             if (orderMaster.AmountPaid == orderMaster.total)
             {

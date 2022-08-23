@@ -27,10 +27,10 @@ namespace Amazon.Controllers
         {
             return await _orderRepository.GetOrderMasterById(id);
         }
-        [HttpPut("id")]
-        public async Task<ActionResult<OrderMaster>> PutOrMaster(int id, OrderMaster om)
+        [HttpPut("OrderMaster")]
+        public async Task<ActionResult<OrderMaster>> PutOrMaster(OrderMaster om)
         {
-            return await _orderRepository.UpdateOrderMaster(id, om);
+            return await _orderRepository.UpdateOrderMaster(om);
 
         }
         [HttpPost("orderMaster")]
@@ -55,9 +55,9 @@ namespace Amazon.Controllers
 
 
 
-        [HttpPost("Buy")]
+        [HttpPost("{customerId}")]
        
-        public async Task Buy(int customerId)
+        public async Task<OrderMaster> Buy(int customerId)
         {
 
             List<Cart> c =  await _cartRepository.GetAllCart(customerId);
@@ -82,6 +82,7 @@ namespace Amazon.Controllers
                 detail.OrderMasterId = om.OrderMasterId;
                 await _orderRepository.AddOrderDetail(detail);
             }
+            return om;
         }
 
     }

@@ -10,6 +10,7 @@ using Amazon.Repository;
 
 namespace Amazon.Controllers
 {
+    
     [Route("api/[controller]")]
     [ApiController]
     public class MerchantController : ControllerBase
