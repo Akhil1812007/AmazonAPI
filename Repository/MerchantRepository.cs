@@ -16,9 +16,9 @@ namespace Amazon.Repository
         {
             _context = context;
             _configuration = configuration;
-    }
+        }
 
-        public  async Task DeleteMerchant(int MerchantId)
+        public  async Task DeleteMerchant(int? MerchantId)
         {
             try
             {
@@ -123,6 +123,8 @@ namespace Amazon.Repository
 
             return token;
         }
+
+        
     }
     }
 

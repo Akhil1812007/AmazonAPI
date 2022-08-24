@@ -69,9 +69,9 @@ namespace Amazon.Controllers
         [HttpPost("MerchantLogin")]
         public async Task<ActionResult<MerchantToken>> MerchantLogin(Merchant m)
         {
-           MerchantToken ml= await _repository.MerchantLogin(m);
+           MerchantToken? ml= await _repository.MerchantLogin(m);
 
-            if (string.IsNullOrEmpty(ml.merchantToken))
+            if (ml==null)
             {
                 return Unauthorized();
             }
