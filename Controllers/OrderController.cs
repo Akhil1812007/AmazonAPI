@@ -36,6 +36,7 @@ namespace Amazon.Controllers
         [HttpPost("orderMaster")]
         public async Task<ActionResult<OrderMaster>> PostOrMaster(OrderMaster om)
         {
+            
             return await _orderRepository.AddOrderMaster(om);
 
 

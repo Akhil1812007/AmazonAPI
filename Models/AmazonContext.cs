@@ -18,6 +18,15 @@ namespace Amazon.Models
         public DbSet<OrderMaster> OrderMasters { get; set; }
         public DbSet<OrderDetail> OrderDetails { get; set; }
         public DbSet<Admin> Admin { get; set; }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<OrderMaster>().HasMany(od=>od.OrderDetails).WithOne(om=>om.OrderMaster).HasForeignKey(k=>k.OrderMasterId).OnDelete(DeleteBehavior.Cascade);
+                                              
+
+            
+        }
+
 
 
     }
