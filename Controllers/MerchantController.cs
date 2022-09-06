@@ -12,12 +12,14 @@ using AmazonAPI.Models;
 
 namespace Amazon.Controllers
 {
-    
+
     [Route("api/[controller]")]
     [ApiController]
     public class MerchantController : ControllerBase
     {
         private readonly IMerchantRepository _repository;
+       
+
 
         public MerchantController(IMerchantRepository repository)
         {
@@ -30,6 +32,7 @@ namespace Amazon.Controllers
         {
             return await _repository.GetMerchant();
         }
+        
         [HttpGet("MerchantId")]
         public async Task<ActionResult<List<Product>>> GetProductByMerchantId(int MerchantId)
         {
@@ -40,7 +43,14 @@ namespace Amazon.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Merchant>> GetMerchant(int id)
         {
-          return await _repository.GetMerchantByID(id);
+            try
+            {
+                return await _repository.GetMerchantByID(id);
+            }
+            catch
+            {
+                return NotFound();
+            }
         }
 
         [HttpPut("{id}")]

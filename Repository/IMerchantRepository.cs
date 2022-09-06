@@ -5,14 +5,14 @@ namespace Amazon.Repository
 {
     public interface IMerchantRepository 
     {
-        Task<List<Merchant>> GetMerchant();
-        Task<Merchant> GetMerchantByID(int MerchantId);
-        Task<Merchant> InsertMerchant(Merchant Merchant);
-        Task DeleteMerchant(int? MerchantId);
-        Task<Merchant> UpdateMerchant(int MerchantId,Merchant merchant);
-        Task<MerchantToken> MerchantLogin(Merchant merchant);
+        public Task<List<Merchant>> GetMerchant();
+        public Task<Merchant> GetMerchantByID(int MerchantId);
+        public Task<Merchant> InsertMerchant(Merchant Merchant);
+        public Task DeleteMerchant(int? MerchantId);
+        public Task<Merchant> UpdateMerchant(int MerchantId,Merchant merchant);
+        public Task<MerchantToken> MerchantLogin(Merchant merchant);
 
-        Task<List<Product>> GetProductByMerchantId(int id);
+        public Task<List<Product>> GetProductByMerchantId(int id);
 
 
 
